@@ -1,0 +1,97 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atlas"
+version = "0.1.0"
+description = "A Modular Agentic AI Platform"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "Atlas Team", email = "team@atlas.ai"}
+]
+keywords = ["ai", "agents", "llm", "automation", "agentic"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "asyncio>=3.4.3",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "anyio>=4.2.0",
+    "httpx>=0.26.0",
+    "tenacity>=8.2.3",
+    "structlog>=23.2.0",
+    "rich>=13.7.0",
+    "redis>=5.0.0",
+    "psycopg2-binary>=2.9.9",
+    "sqlalchemy[asyncio]>=2.0.25",
+    "numpy>=1.26.0",
+    "orjson>=3.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.0",
+    "mypy>=1.8.0",
+    "pre-commit>=3.6.0",
+    "jupyter>=1.0.0",
+]
+llm-openai = ["openai>=1.10.0"]
+llm-anthropic = ["anthropic>=0.15.0"]
+llm-ollama = ["ollama>=0.1.0"]
+coding = [
+    "tree-sitter>=0.21.0",
+    "tree-sitter-python>=0.21.0",
+    "tree-sitter-javascript>=0.21.0",
+]
+browser = ["playwright>=1.41.0"]
+quant = [
+    "pandas>=2.1.0",
+    "numpy>=1.26.0",
+    "scipy>=1.12.0",
+]
+vector = ["chromadb>=0.4.22", "sentence-transformers>=2.3.0"]
+all = [
+    "atlas[dev,llm-openai,llm-anthropic,llm-ollama,coding,browser,quant,vector]",
+]
+
+[project.urls]
+Homepage = "https://github.com/atlas-ai/atlas"
+Documentation = "https://docs.atlas.ai"
+Repository = "https://github.com/atlas-ai/atlas"
+Changelog = "https://github.com/atlas-ai/atlas/blob/main/CHANGELOG.md"
+
+[project.scripts]
+atlas = "atlas.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["atlas*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
