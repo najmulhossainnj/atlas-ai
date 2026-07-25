@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Any, Optional
 
-from sqlalchemy import JSON, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import JSON, DateTime, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -56,7 +56,7 @@ class TaskModel(Base, UUIDMixin, TimestampMixin, SoftDeleteMixin):
     retries: Mapped[int] = mapped_column(Integer, default=0)
     max_retries: Mapped[int] = mapped_column(Integer, default=3)
     
-    metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    extra_metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -75,7 +75,7 @@ class TaskModel(Base, UUIDMixin, TimestampMixin, SoftDeleteMixin):
             "duration_seconds": self.duration_seconds,
             "retries": self.retries,
             "max_retries": self.max_retries,
-            "metadata": self.metadata,
+            "extra_metadata": self.extra_metadata,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }
