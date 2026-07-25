@@ -1,4 +1,4 @@
-"""Frontend layout component."""
+/** Frontend layout component */
 
 import type { Metadata } from "next";
 import "./globals.css";

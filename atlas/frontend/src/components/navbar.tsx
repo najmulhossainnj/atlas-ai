@@ -1,4 +1,4 @@
-"""Navigation bar component."""
+/** Navigation bar component. */
 
 "use client";
 

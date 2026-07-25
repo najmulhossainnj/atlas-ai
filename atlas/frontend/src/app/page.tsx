@@ -1,4 +1,4 @@
-"""Main dashboard page."""
+/** Main dashboard page */
 
 "use client";
 

@@ -1,4 +1,4 @@
-"""Agent inspector component."""
+/** Agent inspector component. */
 
 "use client";
 

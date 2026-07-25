@@ -1,4 +1,4 @@
-"""Workflow builder component."""
+/** Workflow builder component. */
 
 "use client";
 

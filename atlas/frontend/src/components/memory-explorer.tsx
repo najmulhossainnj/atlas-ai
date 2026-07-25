@@ -1,4 +1,4 @@
-"""Memory explorer component."""
+/** Memory explorer component. */
 
 "use client";
 

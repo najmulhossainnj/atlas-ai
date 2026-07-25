@@ -1,4 +1,4 @@
-"""Dashboard component showing system overview."""
+/** Dashboard component showing system overview. */
 
 "use client";
 

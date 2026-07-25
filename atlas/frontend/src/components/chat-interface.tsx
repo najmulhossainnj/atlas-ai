@@ -1,4 +1,4 @@
-"""Chat interface component."""
+/** Chat interface component. */
 
 "use client";
 
