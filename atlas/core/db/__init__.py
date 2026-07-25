@@ -10,6 +10,19 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from atlas.core.models import Base
 
+# Re-export from session and repository modules
+from atlas.core.db.session import (
+    get_session,
+    get_session_factory,
+    get_engine,
+    init_db,
+    close_db,
+    create_tables,
+    drop_tables,
+    session_scope,
+)
+from atlas.core.db.repository import Repository
+
 
 class DatabaseManager:
     """Manages database connections and sessions."""
@@ -112,18 +125,3 @@ async def shutdown_db() -> None:
     if _global_db_manager:
         await _global_db_manager.close()
         _global_db_manager = None
-
-
-class Repository:
-    """Base repository class for database operations."""
-
-    def __init__(self, session: AsyncSession):
-        self.session = session
-
-    async def commit(self) -> None:
-        """Commit the current transaction."""
-        await self.session.commit()
-
-    async def rollback(self) -> None:
-        """Rollback the current transaction."""
-        await self.session.rollback()

@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Any, Optional
 
-from sqlalchemy import JSON, Integer, String, Text
+from sqlalchemy import JSON, DateTime, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from atlas.core.models.base import Base, SoftDeleteMixin, TimestampMixin, UUIDMixin
@@ -31,7 +31,7 @@ class WorkflowModel(Base, UUIDMixin, TimestampMixin, SoftDeleteMixin):
     execution_count: Mapped[int] = mapped_column(Integer, default=0)
     last_executed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     
-    metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    extra_metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -44,7 +44,7 @@ class WorkflowModel(Base, UUIDMixin, TimestampMixin, SoftDeleteMixin):
             "status": self.status,
             "execution_count": self.execution_count,
             "last_executed_at": self.last_executed_at.isoformat() if self.last_executed_at else None,
-            "metadata": self.metadata,
+            "extra_metadata": self.extra_metadata,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }

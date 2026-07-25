@@ -36,7 +36,7 @@ class MemoryModel(Base, UUIDMixin, TimestampMixin, SoftDeleteMixin):
     
     embedding: Mapped[Optional[list[float]]] = mapped_column(ARRAY(Float), nullable=True)
     
-    metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    extra_metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -49,7 +49,7 @@ class MemoryModel(Base, UUIDMixin, TimestampMixin, SoftDeleteMixin):
             "access_count": self.access_count,
             "last_accessed_at": self.last_accessed_at.isoformat() if self.last_accessed_at else None,
             "tags": self.tags,
-            "metadata": self.metadata,
+            "extra_metadata": self.extra_metadata,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }

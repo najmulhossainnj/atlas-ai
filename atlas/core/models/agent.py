@@ -39,7 +39,7 @@ class AgentModel(Base, UUIDMixin, TimestampMixin, SoftDeleteMixin):
     
     current_metrics: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     
-    metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    extra_metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -58,7 +58,7 @@ class AgentModel(Base, UUIDMixin, TimestampMixin, SoftDeleteMixin):
             "skills": self.skills,
             "tools": self.tools,
             "current_metrics": self.current_metrics,
-            "metadata": self.metadata,
+            "extra_metadata": self.extra_metadata,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }
